@@ -45,8 +45,7 @@ namespace _110_1Practice4_1 {
             string s_Res = lb_Res.Text;
             string s_Num = tb_Num.Text;
             int i_NumA = 0;
-            int i_NumB = 0;
-
+            int i_NumB = 0; 
             for (int i_Ct = 0; i_Ct < 4; i_Ct++) {
                 if (s_Res[i_Ct] == s_Num[i_Ct]) {
                     i_NumA++;
@@ -61,10 +60,33 @@ namespace _110_1Practice4_1 {
                 }
             }
 
+            int i_times = Convert.ToInt32(tb_Rem.Text);
+            i_times -= 1;
+            tb_Rem.Text = Convert.ToString(i_times);
+
             if (i_NumA == 4) {
                 b_IsBingo = true;
             }
             return i_NumA.ToString() + "A" + i_NumB.ToString() + "B";
+        }
+
+        protected void btn_ShowNum_Click(object sender, EventArgs e){
+            lb_Num.Text = lb_Res.Text;
+        }
+
+        protected void tb_Num_TextChanged(object sender, EventArgs e){
+            if (tb_Num.Text.Length != 4) 
+                lb_Msg.Text += "請輸入長度為4的數字<br/>";
+            else 
+                lb_Msg.Text += mt_ShowAB() + "<br/>";
+            
+            if (Convert.ToInt32(tb_Rem.Text) == 0 && b_IsBingo == false) 
+                lb_Msg.Text += "次數用完囉!!";
+
+            if (b_IsBingo == true) { 
+                tb_Num.Enabled = false;
+                lb_Msg.Text += "答對了!!";
+            }
         }
     }
 }
